@@ -256,7 +256,7 @@ int car_back_hand(char* buf)
 int car_speed_hand(char* buf)
 {
 	char *p = NULL;
-	
+	printf("%s\r\n",buf);
 	if(buf == NULL)
 		return ARG_ERR;
 	
@@ -264,7 +264,7 @@ int car_speed_hand(char* buf)
 		return STA_ERR;
 	
 	p = strstr(buf,"=");
-	sscanf(p,"%d",(int*)&car_op.speed);
+	sscanf(p+1,"%d",(int*)&car_op.speed);
 	car_op.search = DIRECT;
 
 	return 0;

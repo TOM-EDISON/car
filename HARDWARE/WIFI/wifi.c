@@ -104,7 +104,7 @@ void wifi_task(void *pvParameters)
 					{
 						p = strstr(p,"=");                           //判断是否有参数
 						
-						ret = car_hand[i].fun_hand(p+1);             //执行相应的指令函数
+						ret = car_hand[i].fun_hand(p);             //执行相应的指令函数
 						if(ret != OK)
 							wifi_respond("set fault!",ret,id);        //回复失败
 						else

@@ -67,7 +67,7 @@ void dis_task(void *pvParameters)
 					car_right_hand(NULL);
 			}
 		}
-		vTaskDelay(300);
+		vTaskDelay(100);
 	}
 }
 
@@ -99,11 +99,11 @@ static chose_turn(void)
 	u16 left_dis  = 0;
 	u16 right_dis = 0;
 	
-	TIM_SetCompare3(TIM4,1750);
+	TIM_SetCompare3(TIM4,1800);
 	vTaskDelay(500);
 	left_dis = get_dis();
 	
-	TIM_SetCompare3(TIM4,1950);
+	TIM_SetCompare3(TIM4,1900);
 	vTaskDelay(500);
 	right_dis = get_dis();
 	

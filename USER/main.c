@@ -56,7 +56,7 @@ int main(void)
 	delay_init();	    				//延时函数初始化	 
 	uart_init(115200);					//初始化串口
 	//LED_Init();		  					//初始化LED
-	//KEY_Init();							//初始化按键
+	KEY_Init();							//初始化按键
 	//BEEP_Init();						//初始化蜂鸣器
 	LCD_Init();							//初始化LCD
 	//my_mem_init(SRAMIN);            	//初始化内部内存池
@@ -75,13 +75,29 @@ int main(void)
 //开始任务任务函数
 void start_task(void *pvParameters)
 {
+	struct CAR_OPTION* car;
+	u8 key = 0;
+	char speed[10] = {0};
+	
 	//wifi_init();
 	car_init();
 	dis_init();
 	
+	car = get_car_op();
+	
 	while(1)
 	{
+		key = KEY_Scan(0);
+		if( key )
+		{
+			if(key == 1)
+				sprintf(speed,"=%d",car->speed-100);
+			else if(key == 3)
+				sprintf(speed,"=%d",car->speed+100);
+			car_speed_hand( speed );
+		}
 		lcd_show_init();
+		
 		
         vTaskDelay(1000);             	//延时500ms，也就是500个时钟节拍	
 	}
